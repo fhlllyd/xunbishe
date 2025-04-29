@@ -6,7 +6,6 @@ import geopandas as gpd
 import transbigdata as tbd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 import os
 
 # 设置 Matplotlib 显示中文和负号
@@ -83,7 +82,7 @@ plt.xlim(0, 60)
 plt.xticks(range(0, 60, 5), range(0, 60, 5))
 plt.xlabel('采样间隔（秒）')
 plt.ylabel('概率密度分布')
-plt.savefig('图片/sample_duration_kde.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/采样间隔核密度分布图.svg', format='svg', bbox_inches='tight')
 plt.close()
 
 # 使用自定义函数清理数据
@@ -122,7 +121,7 @@ sns.kdeplot(BUS_GPS_clean_2416[BUS_GPS_clean_2416['diff'] < 1000]['diff'])
 plt.xticks(range(0, 1000, 100), range(0, 1000, 100))
 plt.ylabel('概率密度分布')
 plt.xlabel('距离(米)')
-plt.savefig('图片/distance_kde.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/距离核密度分布图.svg', format='svg', bbox_inches='tight')
 plt.close()
 
 # 只筛选保留距离公交线路 200 米内的坐标点
@@ -132,7 +131,7 @@ BUS_GPS_clean_2416 = BUS_GPS_clean_2416[BUS_GPS_clean_2416['diff'] < 200]
 fig = plt.figure(figsize=(7, 4), dpi=250)
 ax = plt.subplot(111)
 BUS_GPS_clean_2416.plot(ax=ax)
-plt.savefig('图片/matched_points.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/匹配点分布图.svg', format='svg', bbox_inches='tight')
 plt.close()
 
 # 地图匹配后的原始点
@@ -141,7 +140,7 @@ tmp.columns = ['geometry']
 fig = plt.figure(figsize=(7, 4), dpi=250)
 ax = plt.subplot(111)
 gpd.GeoDataFrame(tmp).plot(ax=ax)
-plt.savefig('图片/original_points.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/原始点分布图.svg', format='svg', bbox_inches='tight')
 plt.close()
 
 # 对公交线做缓冲区
@@ -154,7 +153,7 @@ line_buffer = line_buffer.to_crs(epsg=4326)
 fig = plt.figure(figsize=(7, 4), dpi=250)
 ax = plt.subplot(111)
 line_buffer.plot(ax=ax)
-plt.savefig('图片/line_buffer.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/线路缓冲区示意图.svg', format='svg', bbox_inches='tight')
 plt.close()
 
 # tbd.clean_outofshape 方法剔除公交线路缓冲区范围外的数据
@@ -164,6 +163,6 @@ BUS_GPS_clean_2 = tbd.clean_outofshape(BUS_GPS_clean, line_buffer, col=['lon', '
 fig = plt.figure(figsize=(7, 4), dpi=250)
 ax = plt.subplot(111)
 BUS_GPS_clean_2.plot(ax=ax)
-plt.savefig('图片/cleaned_data.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/清理后数据分布图.svg', format='svg', bbox_inches='tight')
 plt.close()
 

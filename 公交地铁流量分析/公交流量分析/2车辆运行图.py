@@ -4,8 +4,6 @@ import pandas as pd
 import geopandas as gpd
 import transbigdata as tbd
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
 import os
 
 # 设置 Matplotlib 显示中文和负号
@@ -120,7 +118,7 @@ if len(selected_vehicle_data) >= 2:  # 至少需要2个点才能画线
     plt.gcf().autofmt_xdate()
     
     plt.tight_layout()
-    plt.savefig('图片/first_vehicle_run.svg', format='svg', bbox_inches='tight')
+    plt.savefig('图片/车辆运行轨迹图.svg', format='svg', bbox_inches='tight')  # 原文件名: first_vehicle_run.svg
     plt.close()
 
     # 绘制单车运行图 (带站点标记，限定时间范围)
@@ -161,7 +159,7 @@ if len(selected_vehicle_data) >= 2:  # 至少需要2个点才能画线
         plt.legend(loc='best')
         
         plt.tight_layout()
-        plt.savefig('图片/first_vehicle_with_stops.svg', format='svg', bbox_inches='tight')
+        plt.savefig('图片/车辆运行轨迹含站点图.svg', format='svg', bbox_inches='tight')  # 原文件名: first_vehicle_with_stops.svg
         plt.close()
     else:
         print(f"警告: 车辆 {best_vehicle_id} 在指定时间范围内数据点不足，无法绘制带站点的运行图")
@@ -204,7 +202,7 @@ plt.title(f'所有车辆运行轨迹 ({start_time.strftime("%H:%M")} - {end_time
 plt.gcf().autofmt_xdate()
 
 plt.tight_layout()
-plt.savefig('图片/all_vehicles_run.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/所有车辆运行轨迹图.svg', format='svg', bbox_inches='tight')  # 原文件名: all_vehicles_run.svg
 plt.close()
 
 # 对车辆重新编号
@@ -266,7 +264,7 @@ plt.title(f'重新编号后所有车辆运行轨迹 ({start_time.strftime("%H:%M
 plt.gcf().autofmt_xdate()
 
 plt.tight_layout()
-plt.savefig('图片/all_vehicles_reindexed_run.svg', format='svg', bbox_inches='tight')
+plt.savefig('图片/重新编号后所有车辆运行轨迹图.svg', format='svg', bbox_inches='tight')  # 原文件名: all_vehicles_reindexed_run.svg
 plt.close()
 
 print("图表绘制完成，请查看'图片'文件夹中的SVG文件。")
